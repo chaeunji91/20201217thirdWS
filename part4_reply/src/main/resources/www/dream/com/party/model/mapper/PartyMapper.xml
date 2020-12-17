@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.dream.com.party.model.mapper.PartyMapper">
+	<resultMap id="partyResultMap"
+		type="www.dream.com.party.model.PartyVO"
+		extends="www.dream.com.framework.model.mapper.FrameworkMapper.commonMngInfoResultMap">
+		<constructor>
+			<idArg column="id" javaType="long" />
+		</constructor>
+		<result property="name" column="name" />
+		<result property="birthDate" column="birth_date" />
+		<!-- Composition 관계, 1:N -->
+		<collection property="listContactPoint"
+			resultMap="contactPointResultMap" columnPrefix="c_">
+		</collection>
+		<discriminator javaType="String" column="party_type">
+			<case value="person" resultMap="personResultMap" />
+			<case value="organization" resultMap="organizationResultMap" />
+			<case value="post" resultMap="postResultMap" />
+		</discriminator>
+	</resultMap>
+	<resultMap id="personResultMap"
+		type="www.dream.com.party.model.PersonVO" extends="partyResultMap">
+		<result property="loginId" column="login_id" />
+		<result property="password" column="password" />
+		<result property="gender" column="gender" />
+	</resultMap>
+	<resultMap id="organizationResultMap"
+		type="www.dream.com.party.model.OrganizationVO"
+		extends="partyResultMap">
+	</resultMap>
+	<resultMap id="postResultMap"
+		type="www.dream.com.party.model.PostVO" extends="partyResultMap">
+		<result property="descript" column="descript" />
+	</resultMap>
+
+	<resultMap id="contactPointResultMap"
+		type="www.dream.com.party.model.ContactPointVO"
+		extends="www.dream.com.framework.model.mapper.FrameworkMapper.commonMngInfoResultMap">
+		<result property="typeName" column="type_name" />
+		<result property="contactPoint" column="contact_point" />
+	</resultMap>
+
+	<!-- 모든 지정한 유형의 Party는 다 나와봐 -->
+	<select id="selectAllParty" resultMap="partyResultMap">
+	<![CDATA[
+		select *
+		  from T_Party
+		 where party_type = #{partyType}
+	]]>
+	</select>
+
+	<!-- 모든 사람은 모든 연락처 정보와 함께 다 나와봐 -->
+	<select id="selectAllPartyWithContactPoint"
+		resultMap="partyResultMap">
+	<![CDATA[
+		select p.*,
+			   c.type_name c_type_name, c.contact_point c_contact_point, c.reg_date c_reg_date, c.update_date c_update_date
+		  from T_Party p
+			   left outer join T_ContactPoint c on p.id = c.party_id
+		 where party_type = #{partyType}
+	]]>
+	</select>
+
+</mapper>
