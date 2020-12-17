@@ -1,3 +1,4 @@
+drop table M_HT_Reply;
 drop table T_Hash_Tag;
 
 --id, super_id, word, descript

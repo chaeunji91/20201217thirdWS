@@ -1,7 +1,9 @@
 drop sequence seq4Board_id;
 drop sequence seq4Reply_id;
 
+
 drop table T_Board;
+drop table T_Reply;
 
 create sequence seq4Board_id;
 create sequence seq4Reply_id;
@@ -23,7 +25,7 @@ insert into T_Board(id, name)
 
 --id, content, writer_id, original_id, obj_type, title, board_id, reg_date, update_date
 create table T_Reply(
-	id					numeric(22, 0) primary key,
+	id					numeric(22, 0) constraint pk_reply primary key,
 	original_id			numeric(22, 0),
 	content				varchar2(4000),
 	writer_id			numeric(22, 0),
