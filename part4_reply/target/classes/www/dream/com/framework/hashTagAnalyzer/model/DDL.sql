@@ -35,8 +35,6 @@ create table M_HT_Reply(
 );
 create index idx_MHTR_Rply on M_HT_Reply(reply_id, hash_tag_id);	--게시글에 달려있는 HashTag 목록 조회
 
-insert into M_HT_Reply(hash_tag_id, reply_id) values(3, 2);
-
 --검색 시 활용할 구문
 select p.*
   from T_Reply p, M_HT_Reply m

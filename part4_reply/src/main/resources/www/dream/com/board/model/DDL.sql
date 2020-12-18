@@ -1,9 +1,8 @@
 drop sequence seq4Board_id;
 drop sequence seq4Reply_id;
 
-
-drop table T_Board;
 drop table T_Reply;
+drop table T_Board;
 
 create sequence seq4Board_id;
 create sequence seq4Reply_id;
@@ -25,7 +24,7 @@ insert into T_Board(id, name)
 
 --id, content, writer_id, original_id, obj_type, title, board_id, reg_date, update_date
 create table T_Reply(
-	id					numeric(22, 0) constraint pk_reply primary key,
+	id					numeric(22, 0) CONSTRAINT pk_reply primary key,
 	original_id			numeric(22, 0),
 	content				varchar2(4000),
 	writer_id			numeric(22, 0),
@@ -40,5 +39,3 @@ create table T_Reply(
 create index idx_writerOnRply on T_Reply(writer_id);
 create index idx_orgOnRply on T_Reply(original_id);
 create index idx_boardOnRply on T_Reply(board_id);
-
-ALTER INDEX SYS_C007477 RENAME TO pk_reply;

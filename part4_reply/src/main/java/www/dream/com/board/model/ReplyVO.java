@@ -28,10 +28,11 @@ public class ReplyVO extends CommonMngInfoVO {
 	@Getter
 	@Caption(whenUse=WhenUse.all, caption="작성자")
 	private PartyVO writer;
-	private List<ReplyVO> listReplies;
 	@Getter
 	private List<HashTagVO> listHashTag;
-
+	@Getter
+	private int countOfReply;
+	
 	public ReplyVO() {
 		int i = 0;
 		i++;
@@ -68,7 +69,7 @@ public class ReplyVO extends CommonMngInfoVO {
 	
 	@Override
 	public String toString() {
-		return "ReplyVO [id=" + id + ", content=" + content + ", writer=" + writer + ", listReplies=" + listReplies
+		return "ReplyVO [id=" + id + ", content=" + content + ", writer=" + writer
 				+ ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
 	}
 	
@@ -76,7 +77,6 @@ public class ReplyVO extends CommonMngInfoVO {
 		return "id=" + id;
 	}
 	protected String toString4ChildPost() {
-		return ", content=" + content + ", writer=" + writer + ", listReplies=" + listReplies
-				+ ", regDate=" + regDate + ", updateDate=" + updateDate;
+		return ", content=" + content + ", writer=" + writer + ", regDate=" + regDate + ", updateDate=" + updateDate;
 	}
 }

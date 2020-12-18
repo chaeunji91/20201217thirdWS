@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import www.dream.com.board.model.ReplyVO;
 import www.dream.com.board.service.ReplyService;
+import www.dream.com.framework.dataType.DreamPair;
 import www.dream.com.framework.model.Criteria;
+import www.dream.com.party.model.PersonVO;
 
 @RestController
 @RequestMapping("/replies/*")
@@ -28,12 +29,13 @@ public class ReplyController {
 	private ReplyService replyService;
 	
 	@GetMapping(value = "pages/{originalId}/{pageNum}", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<ReplyVO>> findReplyWithPaging(
+	public ResponseEntity<DreamPair<Criteria, List<ReplyVO>>> findReplyWithPaging(
 			@PathVariable("originalId") long originalId, 
 			@PathVariable("pageNum") long pageNum) {
 		Criteria criteria = new Criteria(pageNum, replyService.countTotalReplyWithPaging(originalId));
 		List<ReplyVO> listReply = replyService.findReplyWithPaging(originalId, criteria);
-		return new ResponseEntity<>(listReply, HttpStatus.OK);
+		DreamPair<Criteria, List<ReplyVO>> dreamPair = new DreamPair<>(criteria, listReply);
+		return new ResponseEntity<>(dreamPair, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -43,6 +45,7 @@ public class ReplyController {
 
 	@PostMapping(value = "new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> registerReply(@RequestBody ReplyVO reply) {
+		reply.setWriter(new PersonVO(3L));
 		int cnt = replyService.registerReply(reply);
 		return cnt == 1 ? 
 				new ResponseEntity<>("success", HttpStatus.OK) 

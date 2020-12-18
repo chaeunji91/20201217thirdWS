@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import www.dream.com.board.model.PostVO;
 import www.dream.com.board.model.ReplyVO;
 import www.dream.com.board.model.mapper.ReplyMapper;
-import www.dream.com.framework.dataType.DreamPair;
 import www.dream.com.framework.hashTagAnalyzer.model.HashTagVO;
 import www.dream.com.framework.hashTagAnalyzer.service.HashTagService;
 import www.dream.com.framework.model.Criteria;
@@ -30,7 +29,7 @@ public class PostService {
 	}
 
 	public ReplyVO findPostById(long id) {
-		return replyMapper.findPostById(id);
+		return replyMapper.findReplyById(id);
 	}
 
 	@Transactional
@@ -57,7 +56,7 @@ public class PostService {
 	public boolean removePost(PostVO post) {
 		HashTagService hashTagService = BeanUtil.getBean(HashTagService.class);
 		hashTagService.deleteRelWithReply(post.getId());
-		return replyMapper.removePost(post);
+		return replyMapper.removeReply(post.getId());
 	}
 
 }

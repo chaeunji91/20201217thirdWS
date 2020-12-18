@@ -13,23 +13,23 @@ var dateGapDisplayService = (function(){
 		var strReturn = "";
 		
 		if (gap < 1000 * 60) {
-			/* 일분 안에 등록된 경우 */
+			/* 1분 안에 등록된 경우 */
 			strReturn += parseInt(gap / 1000) + "초 전 등록";
 		} else if (gap < 1000 * 60 * 60) {
-			/* 한시간 안에 등록된 경우 */
+			/* 1시간 안에 등록된 경우 */
 			strReturn += parseInt(gap / 1000 / 60) + "분 전 등록";
 		} else if (gap < 1000 * 60 * 60 * 24) {
-			/* 하루 안에 등록된 경우 */
-			strReturn += parseInt(gap / 1000 / 60 / 60) + "일 전 등록";
+			/* 1일 안에 등록된 경우 */
+			strReturn += parseInt(gap / 1000 / 60 / 60)+ "시간 전 등록";
 		} else if (gap < 1000 * 60 * 60 * 24 * 30.5) {
-			/* 한달안에 등록된 경우 */
-			strReturn += parseInt(gap / 1000 / 60 / 60 / 24) + "달 전 등록";
+			/* 1달 안에 등록된 경우 */
+			strReturn += parseInt(gap / 1000 / 60 / 60 / 24)+ "일 전 등록";
 		} else if (gap < 1000 * 60 * 60 * 24 * 365) {
-			/* 일년안에 등록된 경우 */
-			strReturn += parseInt(gap / 1000 / 60 / 60 / 24 / 30.5) + "달 전 등록";
+			/* 1년 안에 등록된 경우 */
+			strReturn += parseInt(gap / 1000 / 60 / 60 / 24 / 30.5)+ "달 전 등록";
 		} else {
-			/* 몇년이 지난 경우 */
-			strReturn += parseInt(gap / 1000 / 60 / 60 / 24 / 365) + "년 전 등록";
+			/* 1년 이상 지난 경우 */
+			strReturn += parseInt(gap / 1000 / 60 / 60 / 24 / 30.5 / 365)+ "년 전 등록";
 		}
 		return strReturn;
 	}

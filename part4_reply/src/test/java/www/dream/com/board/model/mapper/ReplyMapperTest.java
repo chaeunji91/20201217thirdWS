@@ -25,34 +25,4 @@ public class ReplyMapperTest {
 		}
 	}
 
-	//@Test
-	public void testFindAllPostWithReply() {
-		try { 
-			for (ReplyVO reply : replyMapper.findAllPostWithReply(1L))
-				System.out.println(reply);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	//@Test
-	public void testFindAllReply() {
-		try { 
-			for (ReplyVO reply : replyMapper.findAllReply(2L))
-				System.out.println(reply);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	//@Test
-	public void testFindReplyWithReply() {
-		try { 
-			for (ReplyVO reply : replyMapper.findPostWithReply(3L))
-				System.out.println(reply);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

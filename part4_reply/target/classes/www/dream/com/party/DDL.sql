@@ -11,7 +11,7 @@ create sequence seq4Party_id;
 
 --type_name, descript
 create table T_Party_Type (
-	type_name			varchar2(100) constraint pk_party_type primary key,
+	type_name			varchar2(100) CONSTRAINT pk_party_type primary key,
 	descript			varchar2(2000),
 	--공통 관리 정보
 	reg_date			date default sysdate,
@@ -28,7 +28,7 @@ insert into T_Party_Type(type_name, descript)
 --login_id, password, gender
 --descript
 create table T_Party (
-	id					numeric(22, 0) constraint pk_party primary key,
+	id					numeric(22, 0) CONSTRAINT pk_party primary key,
 	name				varchar2(100),
 	birth_date			date,
 	party_type			varchar2(100),	--Descriminator, 타입 구분자
@@ -47,7 +47,7 @@ create table T_Party (
 ----- Key Table을 정의 하시오
 --type_name, descript, validating_reg_exp, super_name
 create table T_ContactPoint_Type (
-	type_name			varchar2(100) constraint pk_contact_type primary key,
+	type_name			varchar2(100) CONSTRAINT pk_contact_type primary key,
 	descript			varchar2(2000),
 	validating_reg_exp	varchar2(100),
 	super_name			varchar2(100),
@@ -70,7 +70,7 @@ create table T_ContactPoint (
 	contact_point		varchar2(500),
 	reg_date			date default sysdate,
 	update_date			date default sysdate,
-	constraint pk_contact primary key(party_id, type_name)		
+	CONSTRAINT pk_contact primary key(party_id, type_name)		
 );
 
 --type_name, descript, super_name

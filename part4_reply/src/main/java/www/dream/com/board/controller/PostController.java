@@ -54,7 +54,7 @@ public class PostController {
 	@PostMapping("registerPost")
 	public String registerPost(PostVO post, RedirectAttributes rttr) {
 		//로그인 처리가 된 다음에 그 정보를 활용하는 스타일로 바꿀... 디폴트 사용자로 홍길동을 임시 사용할거야
-		post.setWriter(new PersonVO(21L));
+		post.setWriter(new PersonVO(3L));
 		postService.registerPost(post);
 		rttr.addFlashAttribute("result", post.getId());
 

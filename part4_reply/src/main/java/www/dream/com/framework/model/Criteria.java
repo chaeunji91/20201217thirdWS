@@ -8,7 +8,7 @@ public class Criteria {
 	/** 쪽 건너뛰기 버튼 전체 개수 */
 	private static final long PAGING_AMOUNT = 10;
 	/** 쪽당 몇 건 보여줄까? */
-	private static final int DEFAULT_AMOUNT = 20;
+	private static final int DEFAULT_AMOUNT = 10;
 	
 	@Setter
 	private String search;

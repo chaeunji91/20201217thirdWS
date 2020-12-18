@@ -51,18 +51,18 @@
 				<div class='pull-right'>
 					<ul class='pagination'>
 						<c:if test="${criteria.hasPrev}">
-							<li class="paginate_button previous">
-								<a href="${criteria.startPage - 1}">&lt;&lt;</a>
+							<li class="page-item previous">
+								<a class='page-link' href="${criteria.startPage - 1}">&lt;&lt;</a>
 							</li>
 						</c:if>
 						<c:forEach var="num" begin="${criteria.startPage}" end="${criteria.endPage}">
-							<li class='paginate_button ${criteria.pageNum == num ? "active" : ""}'>
-								<a href="${num}">${num}</a>
+							<li class='page-item ${criteria.pageNum == num ? "active" : ""}'>
+								<a class='page-link' href="${num}">${num}</a>
 							</li>
 						</c:forEach>
 						<c:if test="${criteria.hasNext}">
-							<li class="paginate_button next">
-								<a href="${criteria.endPage + 1}">&gt;&gt;</a>
+							<li class="page-item next">
+								<a class='page-link' href="${criteria.endPage + 1}">&gt;&gt;</a>
 							</li>
 						</c:if>
 					</ul>

@@ -15,14 +15,8 @@ public interface ReplyMapper {
 	public List<ReplyVO> findPostWithPaging(@Param("boardId") long boardId, @Param("criteria") Criteria criteria);
 	public List<ReplyVO> findAllPostWithReply(long boardId);
 
-	public List<ReplyVO> findAllReply(long originalId);
-	public List<ReplyVO> findPostWithReply(long id);
-	
-	public PostVO findPostById(long id);
-
 	public void registerPost(PostVO post);
 	public boolean updatePost(PostVO post);
-	public boolean removePost(PostVO post);
 
 	public long countTotalReplyWithPaging(@Param("originalId") long originalId);
 	public List<ReplyVO> findReplyWithPaging(@Param("originalId") long originalId, @Param("criteria") Criteria criteria);
